@@ -6,14 +6,14 @@ def GepettoViewerServer(windowName="python-pinocchio", sceneName="world", loadMo
     try:
         viewer = gepetto.corbaserver.Client()
         gui = viewer.gui
-        
+
         # Create window
         window_l = gui.getWindowList()
-        if not windowName in window_l:
+        if windowName not in window_l:
             gui.windowID = gui.createWindow(windowName)
         else:
             gui.windowID = gui.getWindowID(windowName)
-                
+
         # Create scene if needed
         scene_l = gui.getSceneList()
         if sceneName not in scene_l:
@@ -23,8 +23,7 @@ def GepettoViewerServer(windowName="python-pinocchio", sceneName="world", loadMo
         gui.sceneName = sceneName
 
         return gui
-    
-    except:
-        print("Error while starting the viewer client. ")
-        print("Check wheter gepetto-viewer is properly started")
 
+    except Exception:
+        print("Error while starting the viewer client. ")
+        print("Check whether gepetto-gui is properly started")

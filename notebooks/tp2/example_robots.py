@@ -1,22 +1,17 @@
-WITH_UR5   = True
+WITH_UR5 = True
 WITH_ROMEO = False
-
 
 if WITH_UR5:
     from pinocchio.robot_wrapper import RobotWrapper
 
-    path  = 'models/'
-    urdf = path + '/ur_description/urdf/ur5_gripper.urdf'
-    robot = RobotWrapper(urdf,[path,])
-    
+    urdf = '/opt/openrobots/share/ur5_description/urdf/ur5_gripper.urdf'
+    robot = RobotWrapper.BuildFromURDF(urdf)
+
 if WITH_ROMEO:
     from pinocchio.romeo_wrapper import RomeoWrapper
 
-    path = 'models/romeo/'
-    urdf = path + 'urdf/romeo.urdf'
-
-    # Explicitly specify that the first joint is a free flyer.
-    robot = RomeoWrapper(urdf,[path,]) # Load urdf model
+    urdf = '/opt/openrobots/share/romeo_description/urdf/romeo.urdf'
+    robot = RomeoWrapper.BuildFromURDF(urdf)
 
 robot.initDisplay(loadModel=True)
 robot.display(robot.q0)
